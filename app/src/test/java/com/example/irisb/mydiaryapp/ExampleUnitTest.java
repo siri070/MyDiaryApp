@@ -1,4 +1,4 @@
-package com.example.irisb.mydiaryapp2;
+package com.example.irisb.mydiaryapp;
 
 import org.junit.Test;
 

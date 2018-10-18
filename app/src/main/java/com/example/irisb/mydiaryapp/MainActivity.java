@@ -1,4 +1,4 @@
-package com.example.irisb.mydiaryapp2;
+package com.example.irisb.mydiaryapp;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
