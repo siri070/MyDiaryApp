@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".terminHinzufuegen"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/terminTitel"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:inputType="text"
+        android:hint="@android:string/selectTextMode"/>
+    <DatePicker
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:id="@+id/terminDatum">
+
+    </DatePicker>
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:id="@+id/terminBemerkung"
+        android:inputType="text"
+        android:hint="@android:string/selectTextMode"/>
+
+
+    <Switch
+        android:id="@+id/erinnerung"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/speichern"
+        android:text="Speicher"/>
+
+
+</LinearLayout>
