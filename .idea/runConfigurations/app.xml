@@ -1,5 +1,5 @@
 <component name="ProjectRunConfigurationManager">
-  <configuration default="false" name="app" type="AndroidRunConfigurationType" factoryName="Android App" editBeforeRun="true">
+  <configuration default="false" name="app" type="AndroidRunConfigurationType" factoryName="Android App" editBeforeRun="true" activateToolWindowBeforeRun="false">
     <module name="app" />
     <option name="DEPLOY" value="true" />
     <option name="ARTIFACT_NAME" value="" />
@@ -42,7 +42,7 @@
       <option name="ADVANCED_PROFILING_ENABLED" value="false" />
     </Profilers>
     <option name="DEEP_LINK" value="" />
-    <option name="ACTIVITY_CLASS" value="" />
+    <option name="ACTIVITY_CLASS" value="com.example.irisb.mydiaryapp.MainActivity" />
     <method />
   </configuration>
 </component>

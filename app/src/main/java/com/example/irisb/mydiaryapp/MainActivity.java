@@ -1,10 +1,13 @@
 package com.example.irisb.mydiaryapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,6 +56,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        onClickAdd();
+    }
+    private void onClickAdd(){
+        Button neuerTermin = (Button) findViewById(R.id.terminHinzu);
+        View.OnClickListener speichernListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), terminHinzufuegen.class);
+                startActivity(intent);
+
+            }
+        };
+       neuerTermin.setOnClickListener(speichernListener);
 
     }
 
