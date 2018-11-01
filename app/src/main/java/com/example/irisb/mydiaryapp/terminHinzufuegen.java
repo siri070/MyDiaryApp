@@ -113,7 +113,7 @@ public class terminHinzufuegen extends AppCompatActivity{
                    Log.v(TAG, e.toString());
                }
            }
-
+            //adf
            if(file.exists()){
                try{
                    FileWriter fileWriter = new FileWriter(file);
