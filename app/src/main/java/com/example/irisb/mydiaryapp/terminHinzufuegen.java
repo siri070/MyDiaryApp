@@ -51,7 +51,7 @@ public class terminHinzufuegen extends AppCompatActivity{
             }
         };
         speichern.setOnClickListener(speichernListener);
-
+        // Machen, dases wieder zum Parent geht (Kalender oder Tages ansicht)
 
     }
     private void SwitchListener(){
@@ -103,7 +103,7 @@ public class terminHinzufuegen extends AppCompatActivity{
                    Log.v(TAG, e.toString());
                }
            }
-           File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+"Termine"+File.separator+datum+".csv");
+           File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+"Termine"+File.separator+"TermineDaten.csv");
            //Überprüfung ob das File schon existiert, falls nicht wird es erstellt
            if(!file.exists()){
                try{
