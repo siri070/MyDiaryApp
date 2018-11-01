@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     tools:context=".terminHinzufuegen"
     android:orientation="vertical">
 
@@ -12,11 +16,12 @@
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:inputType="text"
-        android:hint="@android:string/selectTextMode"/>
+        android:hint="Terminname"></EditText>
+
     <DatePicker
+        android:id="@+id/terminDatum"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
-        android:id="@+id/terminDatum">
+        android:layout_height="wrap_content">
 
     </DatePicker>
     <EditText
@@ -24,7 +29,7 @@
         android:layout_height="100dp"
         android:id="@+id/terminBemerkung"
         android:inputType="text"
-        android:hint="@android:string/selectTextMode"/>
+        android:hint="Notizen"/>
 
 
     <Switch
@@ -41,3 +46,4 @@
 
 
 </LinearLayout>
+</ScrollView>
