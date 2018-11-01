@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
                 Toast.makeText(getApplicationContext(), dayOfMonth + "/" +month +"/" + year, Toast.LENGTH_LONG).show();
 
+                Intent intent = new Intent(getApplicationContext(), TagesansichtActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -69,8 +71,5 @@ public class MainActivity extends AppCompatActivity {
             }
         };
        neuerTermin.setOnClickListener(speichernListener);
-
     }
-
-
 }

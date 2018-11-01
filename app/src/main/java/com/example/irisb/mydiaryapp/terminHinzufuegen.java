@@ -52,7 +52,6 @@ public class terminHinzufuegen extends AppCompatActivity{
         };
         speichern.setOnClickListener(speichernListener);
 
-
     }
     private void SwitchListener(){
         Switch mySwitch = (Switch) findViewById(R.id.erinnerung);
