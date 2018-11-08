@@ -6,9 +6,17 @@
     android:layout_width="match_parent"
     tools:context=".TagesansichtActivity">
 
+    <Button
+        android:id="@+id/terminHinzu"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="+"
+        android:textSize="30dp"/>
+
     <ListView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent"
+        android:layout_marginTop="80dp">
 
     </ListView>
 

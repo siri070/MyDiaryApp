@@ -51,15 +51,22 @@ public class MainActivity extends AppCompatActivity {
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
-                Toast.makeText(getApplicationContext(), dayOfMonth + "/" +month +"/" + year, Toast.LENGTH_LONG).show();
+              //  Toast.makeText(getApplicationContext(), dayOfMonth + "/" +month +"/" + year, Toast.LENGTH_LONG).show();
 
-                Intent intent = new Intent(getApplicationContext(), TagesansichtActivity.class);
-                startActivity(intent);
+                View.OnClickListener ShowListener = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        Intent intent = new Intent(getApplicationContext(), TagesansichtActivity.class);
+                        startActivity(intent);
+
+                    }
+                };
             }
         });
-
         onClickAdd();
     }
+
+
     private void onClickAdd(){
         Button neuerTermin = (Button) findViewById(R.id.terminHinzu);
         View.OnClickListener speichernListener = new View.OnClickListener() {
