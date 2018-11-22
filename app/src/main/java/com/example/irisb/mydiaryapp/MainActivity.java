@@ -71,6 +71,4 @@ public class MainActivity extends AppCompatActivity {
        neuerTermin.setOnClickListener(speichernListener);
 
     }
-
-
 }
