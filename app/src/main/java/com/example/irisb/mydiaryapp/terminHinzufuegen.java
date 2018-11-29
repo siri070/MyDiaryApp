@@ -75,17 +75,16 @@ public class terminHinzufuegen extends AppCompatActivity{
         int permissonCheckWrite = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         if( ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
             if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)){
-
             }
             else{
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_PERMISSON_REQUEST_WRITE_EXTERNAL_STORAGE);
             }
         }
+
         //Read
         int permissonCheckRead = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
         if( ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
             if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)){
-
             }
             else{
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, MY_PERMISSON_REQUEST_READ_EXTERNAL_STORAGE);
@@ -149,20 +148,15 @@ public class terminHinzufuegen extends AppCompatActivity{
         String terminBemerkung = etBemerkung.getText().toString();
 
         //Switch erinnerung
-
         if(erinnerung ){
 
             //Alarm implementieren
-
-
         }
         String alleInfos= terminTitel+";"+terminBemerkung+";"+Datum;
         return alleInfos;
-
     }
 
     private void error(String fehlermeldung){
-
         AlertDialog.Builder helpBuilder = new AlertDialog.Builder(this);
         helpBuilder.setTitle("Meldung");
         helpBuilder.setMessage(fehlermeldung);
@@ -177,7 +171,5 @@ public class terminHinzufuegen extends AppCompatActivity{
         // Remember, create doesn't show the dialog
         AlertDialog helpDialog = helpBuilder.create();
         helpDialog.show();
-
-
     }
 }
