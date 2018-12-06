@@ -12,7 +12,11 @@ import android.widget.CalendarView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
+    //https://applandeo.com/blog/material-calendar-view-customized-calendar-widget-android/
 
     private TextView mTextMessage;
 
@@ -37,12 +41,14 @@ public class MainActivity extends AppCompatActivity {
     };
 
     CalendarView calendar;
+    private List<TerminData> terminData = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        //
+        calendar = (CalendarView) findViewById(R.id.calendar);
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -51,8 +57,9 @@ public class MainActivity extends AppCompatActivity {
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
-                Toast.makeText(getApplicationContext(), dayOfMonth + "/" +month +"/" + year, Toast.LENGTH_LONG).show();
+               Toast.makeText(getApplicationContext(), dayOfMonth + "/" +month +"/" + year, Toast.LENGTH_LONG).show();
                        /* Intent intent = new Intent(MainActivity.this, TagesansichtActivity.class);
+                       //https://github.com/Applandeo/Material-Calendar-View
                         startActivity(intent);
                         Intent intent = new Intent(getApplicationContext(), TagesansichtActivity.class);
                         startActivity(intent);
@@ -69,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), terminHinzufuegen.class);
                 startActivity(intent);
+                /*Intent intent = new Intent(getApplicationContext(), TagesansichtActivity.class);
+                startActivity(intent);*/
             }
         };
        neuerTermin.setOnClickListener(speichernListener);

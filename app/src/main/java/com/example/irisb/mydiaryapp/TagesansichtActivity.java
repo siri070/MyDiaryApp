@@ -17,11 +17,11 @@ public class TagesansichtActivity extends AppCompatActivity {
     ArrayAdapter eventListe;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+        protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tagesansicht);
-       addEventToList();
-       onClickAdd();
+        addEventToList();
+        onClickAdd();
     }
 
     private void addEventToList() {
@@ -48,7 +48,7 @@ public class TagesansichtActivity extends AppCompatActivity {
     }
 
     private void onClickAdd(){
-        Button neuerTermin = (Button) findViewById(R.id.terminHinzu);
+        Button terminHinzu = (Button) findViewById(R.id.terminHinzu);
         View.OnClickListener speichernListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,6 +56,6 @@ public class TagesansichtActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         };
-        neuerTermin.setOnClickListener(speichernListener);
+        terminHinzu.setOnClickListener(speichernListener);
     }
 }
