@@ -21,7 +21,6 @@ ArrayAdapter TerminList;
     super.onCreate(saveInstanceState);
     setContentView(R.layout.activity_todoliste_anzeigen);
     getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
 }
 
 
