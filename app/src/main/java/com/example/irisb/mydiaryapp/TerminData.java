@@ -12,16 +12,16 @@ import java.util.Scanner;
 
 public class TerminData {   private static ArrayList<ArrayList<String>> dataFromFile;
 
-    private TerminData(Context c) {
+    public TerminData(Context c) {
         // String path=  Environment.getExternalStorageDirectory().getAbsolutePath()+ File.separator+"favoriten"+File.separator+"favoriten_data.csv";
 
         Scanner scanner = null;
         try {
-            scanner = new Scanner(new File(Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+"Termine"+File.separator+"TermineDaten.csv"));
+            scanner = new Scanner(new File(Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+"Termine"+File.separator+"TerminDaten.csv"));
         } catch (FileNotFoundException e) {
             Log.i("Keine Datei Gefunden",e.toString());
         }
-        scanner.useDelimiter(";");
+       // scanner.useDelimiter(";");
         dataFromFile = new ArrayList<ArrayList<String>>();
         while (scanner.hasNext()){
             String dataInRow = scanner.nextLine();

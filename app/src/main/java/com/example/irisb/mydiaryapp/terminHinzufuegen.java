@@ -22,6 +22,8 @@ import android.widget.CompoundButton;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Switch;
+
+import java.io.PrintWriter;
 import java.util.GregorianCalendar;
 import android.support.v4.app.RemoteInput;
 import android.support.v4.app.NotificationManagerCompat;
@@ -45,12 +47,15 @@ public class terminHinzufuegen extends AppCompatActivity{
     private int MY_PERMISSON_REQUEST_READ_EXTERNAL_STORAGE;
     public static final String KEY_NOTIFICATION_REPLY = "KEY_NOTIFICATION_REPLY";
     private boolean erinnerung;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_termin_hinzufuegen);
         SwitchListener();
         OnClick_Speichern();
+        Notification notifiy= new Notification(getApplicationContext());
     }
     private void OnClick_Speichern(){
         //Listener für den Wetterprognose-Button
@@ -109,16 +114,28 @@ public class terminHinzufuegen extends AppCompatActivity{
            if(!fileDir.exists()){
                try {
                    fileDir.mkdir();
+
                }
                catch (Exception e ){
                    Log.v(TAG, e.toString());
                }
            }
-           File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+"Termine"+File.separator+"TermineDaten.csv");
+           File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+"Termine"+File.separator+"TerminDaten.csv");
            //Überprüfung ob das File schon existiert, falls nicht wird es erstellt
            if(!file.exists()){
                try{
                    file.createNewFile();
+                   FileWriter fileWriter = new FileWriter(file);
+                 /*  BufferedWriter bufferedWriter= new BufferedWriter(fileWriter);
+                   //Daten in das File schreiben
+
+                   bufferedWriter.write(Infos);
+                   bufferedWriter.newLine();
+                   bufferedWriter.close();
+                   error("Der Termin wurde erstellt. "+erinnerung);*/
+                 PrintWriter writer = new PrintWriter(fileWriter);
+                 writer.println(Infos);
+                 writer.close();
                }
                catch (Exception e){
                    Log.v(TAG, e.toString());
@@ -128,13 +145,16 @@ public class terminHinzufuegen extends AppCompatActivity{
            if(file.exists()){
                try{
                    FileWriter fileWriter = new FileWriter(file);
-                   BufferedWriter bufferedWriter= new BufferedWriter(fileWriter);
+                   /*  BufferedWriter bufferedWriter= new BufferedWriter(fileWriter);
                    //Daten in das File schreiben
 
                    bufferedWriter.write(Infos);
                    bufferedWriter.newLine();
                    bufferedWriter.close();
-                   error("Der Termin wurde erstellt.");
+                   error("Der Termin wurde erstellt. "+erinnerung);*/
+                   PrintWriter writer = new PrintWriter(fileWriter);
+                   writer.println(Infos);
+                   writer.close();
                }
                catch (Exception e){
                    Log.v(TAG, e.toString());
@@ -153,9 +173,9 @@ public class terminHinzufuegen extends AppCompatActivity{
         //DatePicker terminDatum
         DatePicker dpDatum= (DatePicker)findViewById(R.id.terminDatum);
         int day = dpDatum.getDayOfMonth();
-        int month = dpDatum.getMonth();
+        int month = dpDatum.getMonth()+1;
         int year =  dpDatum.getYear();
-        String Datum = day+"."+month+"."+year;
+        String Datum = day+"/"+month+"/"+year;
 
         //EditText terminBemerkung
         EditText etBemerkung= (EditText) findViewById(R.id.terminBemerkung);
@@ -220,21 +240,6 @@ public class terminHinzufuegen extends AppCompatActivity{
 //TODO http://it-ride.blogspot.com/2010/10/android-implementing-notification.html versuchen wenn die App nicht läuft
 
 
-         /*   Long time = new GregorianCalendar().getTimeInMillis()+(((24*60*60*1000)*differenceDay)+((24*60*60*1000)*dayInMonth)+((24*60*60*1000)*(differenceYear*365)));
-
-            // create an Intent and set the class which will execute when Alarm triggers, here we have
-            // given AlarmReciever in the Intent, the onRecieve() method of this class will execute when
-
-            Intent intentAlarm = new Intent(this, NotificationReceiver.class);
-
-            //Get the Alarm Service
-            AlarmManager alarmManager = (AlarmManager) getSystemService(getApplicationContext().ALARM_SERVICE);
-
-            //set the alarm for particular time
-            alarmManager.set(AlarmManager.RTC_WAKEUP,time, PendingIntent.getBroadcast(this,1,  intentAlarm, PendingIntent.FLAG_UPDATE_CURRENT));
-            Toast.makeText(this, "Alarm Scheduled for"+Datum+"in "+differenceDay+"/"+differenceMonth+"/"+differenceYear, Toast.LENGTH_LONG).show();
-            /*
-*/
 
 
         }
@@ -256,6 +261,11 @@ public class terminHinzufuegen extends AppCompatActivity{
                     }
                 });
 
+
+
+
+
+
         // Remember, create doesn't show the dialog
         AlertDialog helpDialog = helpBuilder.create();
         helpDialog.show();
@@ -265,8 +275,12 @@ public class terminHinzufuegen extends AppCompatActivity{
 
     @Override
     protected void onStop() {
-        startService(new Intent(this, NotificationService.class));
+       // Intent service = new Intent(this, SimpleService.class);
 
+       // service.putExtra("saved",);
+      //  startService(service);
+     //   Intent activity = new Intent(this, NotificationA.class);
+       // startActivity(activity);
         super.onStop();
     }
 }
