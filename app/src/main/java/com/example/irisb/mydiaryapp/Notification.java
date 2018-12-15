@@ -8,10 +8,11 @@ import android.support.v4.app.NotificationCompat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.*;
 
 public class Notification {
     private ArrayList<String> terminList;
-
+    private int notificationId ;
     public Notification(Context context){
        // favoritenListe = new ArrayAdapter<String>(this, android.R.layout. simple_list_item_1 );
 
@@ -21,13 +22,16 @@ public class Notification {
     private void getData(Context context){
         terminList= new ArrayList<String>();
         TerminData td = new TerminData(context);
-        final ArrayList<ArrayList<String>> alleTermine = td.AlleTermine(context);
+        final ArrayList<ArrayList<String>> alleTermine = td.data();
         if(!alleTermine.isEmpty()){
             for (ArrayList<String> b : alleTermine) {
-               if(b.get(3).length()==4) {
-                  String data=b.get(0)+";"+b.get(1)+";"+b.get(2);
-                  terminList.add(data);
-               }
+                if(b.size()==4){
+                    if(b.get(3).length()==4) {
+                        String data=b.get(0)+";"+b.get(1)+";"+b.get(2);
+                        terminList.add(data);
+                    }
+                }
+
 
 
             }
@@ -36,12 +40,14 @@ public class Notification {
     }
     private void notifyUser(Context context) {
         if (terminList != null) {
+            int counter=0;
             for (int i = 0; i < terminList.size(); i++) {
                 String[] data = terminList.get(i).toString().split(";");
                 String terminTitel = data[0];
                 String terminBemerkung = data[1];
                 String datum = data[2];
-
+                Random r = new Random();
+                notificationId = r.nextInt() ;
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                 String date = sdf.format(new Date());
                 if (datum.equals(date)) {
@@ -50,7 +56,7 @@ public class Notification {
                             .setContentTitle(terminTitel)
                             .setContentText(terminBemerkung)
                             .setAutoCancel(true);
-                    int notificationId = 1;
+
                     // Obtain NotificationA system service in order to show the notification
                     NotificationManager notificationManager = (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
                     notificationManager.notify(notificationId, mBuilder.build());
@@ -61,7 +67,7 @@ public class Notification {
                             .setContentTitle("Keine Termine")
                             .setContentText("Sie haben heute keine Termine")
                             .setAutoCancel(true);
-                    int notificationId = 1;
+
                     // Obtain NotificationA system service in order to show the notification
                     NotificationManager notificationManager = (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
                     notificationManager.notify(notificationId, mBuilder.build());

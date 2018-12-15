@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     //https://applandeo.com/blog/material-calendar-view-customized-calendar-widget-android/
 
     private TextView mTextMessage;
+    private String iAmHere="kalender";
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -27,13 +28,16 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_todo:
-                    mTextMessage.setText(R.string.title_todo);
+                    if(iAmHere=="todo"){
+                        //Todo Activity TODO starten
+                    }
+
                     return true;
-               /* case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
-                    return true;*/
+
                 case R.id.navigation_kalender:
-                    mTextMessage.setText(R.string.title_kalender);
+                    if(iAmHere=="kalender"){
+                        mTextMessage.setText(R.string.title_kalender);
+                    }
                     return true;
             }
             return false;

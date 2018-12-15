@@ -23,15 +23,13 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Switch;
 
-import java.io.PrintWriter;
+
 import java.util.GregorianCalendar;
 import android.support.v4.app.RemoteInput;
 import android.support.v4.app.NotificationManagerCompat;
-import java.io.BufferedWriter;
-import java.io.File;
-import android.os.Build;
+
 import android.widget.Toast;
-import java.io.FileWriter;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.text.FieldPosition;
@@ -42,7 +40,7 @@ import java.util.Date;
 
 public class terminHinzufuegen extends AppCompatActivity{
     private static String TAG = "Termin";
-    public DateFormat datum;
+    public String datum;
     private int MY_PERMISSON_REQUEST_WRITE_EXTERNAL_STORAGE;
     private int MY_PERMISSON_REQUEST_READ_EXTERNAL_STORAGE;
     public static final String KEY_NOTIFICATION_REPLY = "KEY_NOTIFICATION_REPLY";
@@ -55,7 +53,26 @@ public class terminHinzufuegen extends AppCompatActivity{
         setContentView(R.layout.activity_termin_hinzufuegen);
         SwitchListener();
         OnClick_Speichern();
-        Notification notifiy= new Notification(getApplicationContext());
+        int permissonCheckWrite = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        if( ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
+            if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)){
+
+            }
+            else{
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_PERMISSON_REQUEST_WRITE_EXTERNAL_STORAGE);
+            }
+        }
+        //Read
+        int permissonCheckRead = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
+        if( ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
+            if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)){
+
+            }
+            else{
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, MY_PERMISSON_REQUEST_READ_EXTERNAL_STORAGE);
+            }
+        }
+      Notification notifiy= new Notification(getApplicationContext());
     }
     private void OnClick_Speichern(){
         //Listener für den Wetterprognose-Button
@@ -63,7 +80,11 @@ public class terminHinzufuegen extends AppCompatActivity{
         View.OnClickListener speichernListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                save();
+                Terminspeichern terminspeichern = new Terminspeichern(GetData(),getApplicationContext(),datum);
+                if(terminspeichern.save()){
+                    error("Der Termin wurde gespeichert");
+                }
+                else{error("Der Termin konnte nicht gespeichert werden. Überprüfen Sie bitte, ob eine Speicherkarte eingesetzt ist.");}
             }
         };
         speichern.setOnClickListener(speichernListener);
@@ -89,80 +110,6 @@ public class terminHinzufuegen extends AppCompatActivity{
     private void save(){
         //für die Erlaubnis fragen
         //Write
-        int permissonCheckWrite = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        if( ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
-            if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)){
-
-            }
-            else{
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_PERMISSON_REQUEST_WRITE_EXTERNAL_STORAGE);
-            }
-        }
-        //Read
-        int permissonCheckRead = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
-        if( ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
-            if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)){
-
-            }
-            else{
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, MY_PERMISSON_REQUEST_READ_EXTERNAL_STORAGE);
-            }
-        }
-        String Infos = GetData();
-           File fileDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+"Termine");
-           //èberprüfung ob es den Ordner schon gibt, falls nicht wird er erstellt
-           if(!fileDir.exists()){
-               try {
-                   fileDir.mkdir();
-
-               }
-               catch (Exception e ){
-                   Log.v(TAG, e.toString());
-               }
-           }
-           File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+"Termine"+File.separator+"TerminDaten.csv");
-           //Überprüfung ob das File schon existiert, falls nicht wird es erstellt
-           if(!file.exists()){
-               try{
-                   file.createNewFile();
-                   FileWriter fileWriter = new FileWriter(file);
-                 /*  BufferedWriter bufferedWriter= new BufferedWriter(fileWriter);
-                   //Daten in das File schreiben
-
-                   bufferedWriter.write(Infos);
-                   bufferedWriter.newLine();
-                   bufferedWriter.close();
-                   error("Der Termin wurde erstellt. "+erinnerung);*/
-                 PrintWriter writer = new PrintWriter(fileWriter);
-                 writer.println(Infos);
-                 writer.close();
-               }
-               catch (Exception e){
-                   Log.v(TAG, e.toString());
-               }
-           }
-            //adf
-           if(file.exists()){
-               try{
-                   FileWriter fileWriter = new FileWriter(file);
-                   /*  BufferedWriter bufferedWriter= new BufferedWriter(fileWriter);
-                   //Daten in das File schreiben
-
-                   bufferedWriter.write(Infos);
-                   bufferedWriter.newLine();
-                   bufferedWriter.close();
-                   error("Der Termin wurde erstellt. "+erinnerung);*/
-                   PrintWriter writer = new PrintWriter(fileWriter);
-                   writer.println(Infos);
-                   writer.close();
-               }
-               catch (Exception e){
-                   Log.v(TAG, e.toString());
-                   error("Der Termin konnte nicht hinzugefügt werden");
-               }
-
-           }
-
 
     }
     private String GetData(){
@@ -176,7 +123,7 @@ public class terminHinzufuegen extends AppCompatActivity{
         int month = dpDatum.getMonth()+1;
         int year =  dpDatum.getYear();
         String Datum = day+"/"+month+"/"+year;
-
+        datum=year+"-"+month+"-"+day;
         //EditText terminBemerkung
         EditText etBemerkung= (EditText) findViewById(R.id.terminBemerkung);
         String terminBemerkung = etBemerkung.getText().toString();
@@ -191,53 +138,6 @@ public class terminHinzufuegen extends AppCompatActivity{
         //Switch erinnerung
 
         if(erinnerung ) {
-
-            // time at which alarm will be scheduled here alarm is scheduled at 1 day from current time,
-            // we fetch  the current time in milliseconds and added 1 day time
-            // i.e. 24*60*60*1000= 86,400,000   milliseconds in a day
-            //TODO datum von heute mit dem anderen vergleichen
-            int differenceDay;
-            int differenceMonth;
-            int differenceYear;
-            int dayInMonth;
-            if (thisDay <= day) {
-                differenceDay = day - thisDay;
-            } else {
-                differenceDay = day;
-            }
-            if (thisMonth <= month) {
-                differenceMonth = month - thisMonth;
-            } else {
-                differenceMonth = month - 10;
-            }
-            if (thisYear <= year) {
-                differenceYear = year - thisYear;
-            } else {
-                differenceYear = year;
-            }
-            switch (month) {
-                case 1:
-                case 3:
-                case 5:
-                case 7:
-                case 8:
-                case 10:
-                case 12:
-                    dayInMonth = 31 + differenceMonth;
-                    break;
-                case 4:
-                case 6:
-                case 9:
-                case 11:
-                    dayInMonth = 30 + differenceMonth;
-                    break;
-                case 2:
-                    dayInMonth = 28 + differenceMonth;
-                    break;
-                default:
-                    dayInMonth = 30;
-            }
-//TODO http://it-ride.blogspot.com/2010/10/android-implementing-notification.html versuchen wenn die App nicht läuft
 
 
 
@@ -275,12 +175,7 @@ public class terminHinzufuegen extends AppCompatActivity{
 
     @Override
     protected void onStop() {
-       // Intent service = new Intent(this, SimpleService.class);
 
-       // service.putExtra("saved",);
-      //  startService(service);
-     //   Intent activity = new Intent(this, NotificationA.class);
-       // startActivity(activity);
         super.onStop();
     }
 }
