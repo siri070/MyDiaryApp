@@ -67,7 +67,7 @@ public class Notification {
                             .setContentTitle("Keine Termine")
                             .setContentText("Sie haben heute keine Termine")
                             .setAutoCancel(true);
-
+                    notificationId=1;
                     // Obtain NotificationA system service in order to show the notification
                     NotificationManager notificationManager = (NotificationManager) context.getSystemService(context.NOTIFICATION_SERVICE);
                     notificationManager.notify(notificationId, mBuilder.build());

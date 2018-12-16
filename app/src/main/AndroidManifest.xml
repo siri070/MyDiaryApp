@@ -22,7 +22,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".terminHinzufuegen" />
+        <activity android:name=".terminHinzufuegen"
+            android:label="Neuer Termin">
+            <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.example.irisb.mydiaryapp.MainActivity" /></activity>
 
     </application>
 </manifest>

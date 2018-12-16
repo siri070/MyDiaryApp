@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Environment;
+import android.support.v4.app.NavUtils;
 import android.support.v4.app.NotificationCompat;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -53,6 +54,7 @@ public class terminHinzufuegen extends AppCompatActivity{
         setContentView(R.layout.activity_termin_hinzufuegen);
         SwitchListener();
         OnClick_Speichern();
+        OnClick_Abbrechen();
         int permissonCheckWrite = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         if( ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
             if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)){
@@ -74,21 +76,27 @@ public class terminHinzufuegen extends AppCompatActivity{
         }
       Notification notifiy= new Notification(getApplicationContext());
     }
+    private void OnClick_Abbrechen(){
+        Button speichern = (Button) findViewById(R.id.abbrechen);
+        View.OnClickListener speichernListener = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                navigateUpTo(intent);
+            }
+        };
+        speichern.setOnClickListener(speichernListener);
+    }
     private void OnClick_Speichern(){
-        //Listener für den Wetterprognose-Button
         Button speichern = (Button) findViewById(R.id.speichern);
         View.OnClickListener speichernListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Terminspeichern terminspeichern = new Terminspeichern(GetData(),getApplicationContext(),datum);
-                if(terminspeichern.save()){
-                    error("Der Termin wurde gespeichert");
-                }
-                else{error("Der Termin konnte nicht gespeichert werden. Überprüfen Sie bitte, ob eine Speicherkarte eingesetzt ist.");}
+                Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                startActivity(intent);
             }
         };
         speichern.setOnClickListener(speichernListener);
-        // Machen, dases wieder zum Parent geht (Kalender oder Tages ansicht)
 
     }
     private void SwitchListener(){

@@ -44,6 +44,11 @@
         android:layout_height="50dp"
         android:id="@+id/speichern"
         android:text="Speicher"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/abbrechen"
+        android:text="abbrechen"/>
 
 
 </LinearLayout>
