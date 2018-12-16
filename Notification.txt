@@ -1,0 +1,29 @@
+ final ArrayList<ArrayList<String>> allTermins= TerminData.AlleTermine(getApplicationContext());
+                        for (ArrayList<String> t : allTermins) {
+                          //  favoritenListe.add(b.get(2)+"-"+b.get(3));
+                            // TODO CALL NOTIFICATION FUNC
+                            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                            String date = sdf.format(new Date());
+
+                            if(Boolean.parseBoolean(t.get(3))== true){
+
+                                if(t.get(2)==date.toString()){
+                                   /* NotificationReceiver notificationReceiver = new NotificationReceiver(t.get(0),t.get(1));
+                                    Intent intent= new Intent(getApplicationContext(), MainActivity.class);
+                                    notificationReceiver.onReceive(getApplicationContext(),intent);*/
+                                    NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(getApplicationContext())
+                                            .setSmallIcon(android.R.drawable.ic_dialog_info)
+                                            .setContentTitle(t.get(0))
+                                            .setContentText(t.get(1))
+                                            .setAutoCancel(true);
+                                                                                       ;
+
+                                    int notificationId= 1;
+                                    // Obtain NotificationManager system service in order to show the notification
+                                    NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+                                    notificationManager.notify(notificationId, mBuilder.build());
+                                }
+
+                            }
+
+                        }
