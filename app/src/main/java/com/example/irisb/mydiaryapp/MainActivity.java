@@ -1,10 +1,12 @@
 package com.example.irisb.mydiaryapp;
 
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -49,11 +51,21 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         //
         calendar = (CalendarView) findViewById(R.id.calendar);
+      /*  calendar.setOnDateChangeListener(CalendarView , year, month, dayOfMonth) {
+            String data = year + "/" + month + "/"+ dayOfMonth;
+            Log.d(TAG, "onSelectedDayChange: yyyy/mm/dd"+ data);
+            Intent intent = new Intent(MainActivity.this.onClickAdd().class);
+            Intent lastIntent = getIntent();
+            intent.putExtra("Titel", lastIntent.getStringExtra("Titel"));
+            intent.putExtra("year", year);
+            intent.putExtra("month", month);
+            intent.putExtra("dayOfMonth", dayOfMonth);
+            startActivity(intent);
+        }*/
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        calendar = (CalendarView) findViewById(R.id.calendar);
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
@@ -64,8 +76,17 @@ public class MainActivity extends AppCompatActivity {
                         Intent intent = new Intent(getApplicationContext(), TagesansichtActivity.class);
                         startActivity(intent);
                         */
+
+                       /*
+                       //https://stackoverflow.com/questions/22583122/how-to-set-focus-on-a-specific-date-in-calendarview-knowing-date-is-dd-mm-yyyy
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(calendar.YEAR, year);
+                calendar.set(calendar.MONTH, month);
+                calendar.set(calendar.DAY_OF_MONTH, day);
+                */
             }
         });
+
         onClickAdd();
     }
 

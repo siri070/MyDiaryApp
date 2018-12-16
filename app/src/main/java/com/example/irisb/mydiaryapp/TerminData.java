@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
-public class TerminData {   private static ArrayList<ArrayList<String>> dataFromFile;
+public class TerminData {
+    private static ArrayList<ArrayList<String>> dataFromFile;
 
     private TerminData(Context c) {
         // String path=  Environment.getExternalStorageDirectory().getAbsolutePath()+ File.separator+"favoriten"+File.separator+"favoriten_data.csv";
