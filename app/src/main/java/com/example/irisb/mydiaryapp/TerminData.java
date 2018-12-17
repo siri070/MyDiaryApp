@@ -17,10 +17,16 @@ import java.util.Scanner;
 import java.util.Collections;
 
 public class TerminData {
+<<<<<<< HEAD
+    private static ArrayList<ArrayList<String>> dataFromFile;
+
+    private TerminData(Context c) {
+=======
     private static ArrayList<ArrayList<String>> dataFromFile= new ArrayList<ArrayList<String>>();
     private ArrayList<File> files = new ArrayList<File>();
     private File directory = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+"Termine");
     public TerminData(Context c) {/*
+>>>>>>> 85509a57e5c2cee46d7bd4c97d618e56ddedbe47
         // String path=  Environment.getExternalStorageDirectory().getAbsolutePath()+ File.separator+"favoriten"+File.separator+"favoriten_data.csv";
 
         Scanner scanner= null;
