@@ -56,21 +56,8 @@ public class MainActivity extends AppCompatActivity {
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-
-        calendar = (CalendarView) findViewById(R.id.calendar);
-        calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
-            @Override
-            public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
-               Toast.makeText(getApplicationContext(), dayOfMonth + "/" +month +"/" + year, Toast.LENGTH_LONG).show();
-                       /* Intent intent = new Intent(MainActivity.this, TagesansichtActivity.class);
-                       //https://github.com/Applandeo/Material-Calendar-View
-                        startActivity(intent);
-                        Intent intent = new Intent(getApplicationContext(), TagesansichtActivity.class);
-                        startActivity(intent);
-                        */
-            }
-        });
         onClickAdd();
+        OnClickCalendar();
     }
 
     private void onClickAdd(){
@@ -85,5 +72,24 @@ public class MainActivity extends AppCompatActivity {
             }
         };
        neuerTermin.setOnClickListener(speichernListener);
+    }
+
+    public void OnClickCalendar() {
+
+        CalendarView calendarView=(CalendarView) findViewById(R.id.calendar);
+        calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
+
+            @Override
+            public void onSelectedDayChange(CalendarView view, int year, int month,
+                                            int dayOfMonth) {
+                month++;
+                String date= dayOfMonth+"/"+month+"/"+year;
+                Intent intent = new Intent(getApplicationContext(), TagesansichtActivity.class);
+
+                intent.putExtra("date",date);
+                startActivity(intent);
+            }
+        });
+
     }
 }

@@ -46,7 +46,7 @@ public class TerminData {
         }
         return dataFromFile;
     }
-    public  ArrayList<ArrayList<String>> data(){
+    public ArrayList<ArrayList<String>> data(){
         if(directory.listFiles().length>0){
            files.addAll(Arrays.asList(directory.listFiles()));
            Collections.sort(files);
