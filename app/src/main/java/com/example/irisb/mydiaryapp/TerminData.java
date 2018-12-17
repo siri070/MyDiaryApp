@@ -17,40 +17,13 @@ import java.util.Scanner;
 import java.util.Collections;
 
 public class TerminData {
-<<<<<<< HEAD
-    private static ArrayList<ArrayList<String>> dataFromFile;
 
-    private TerminData(Context c) {
-=======
+
     private static ArrayList<ArrayList<String>> dataFromFile= new ArrayList<ArrayList<String>>();
     private ArrayList<File> files = new ArrayList<File>();
     private File directory = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+"Termine");
-    public TerminData(Context c) {/*
->>>>>>> 85509a57e5c2cee46d7bd4c97d618e56ddedbe47
-        // String path=  Environment.getExternalStorageDirectory().getAbsolutePath()+ File.separator+"favoriten"+File.separator+"favoriten_data.csv";
+    public TerminData(Context c) {
 
-        Scanner scanner= null;
-        try {
-            scanner = new Scanner(new File(Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+"Termine"+File.separator+"TerminDaten1.txt"));
-        } catch (FileNotFoundException e) {
-            Log.i("Keine Datei Gefunden",e.toString());
-        }
-       scanner.useDelimiter("\n");
-        dataFromFile = new ArrayList<ArrayList<String>>();
-        while (scanner.hasNextLine()){
-            String dataInRow = scanner.nextLine();
-            String[]dataInRowArray = dataInRow.split(";");
-
-            ArrayList<String> rowDataFromFile = new ArrayList<String>(Arrays.asList(dataInRowArray));
-            dataFromFile.add(rowDataFromFile);
-        }
-        scanner.close();*/
-    }
-    public static ArrayList<ArrayList<String>> AlleTermine(Context c) {
-        if (null == dataFromFile) {
-            new TerminData(c);
-        }
-        return dataFromFile;
     }
     public ArrayList<ArrayList<String>> data(){
         if(directory.listFiles().length>0){

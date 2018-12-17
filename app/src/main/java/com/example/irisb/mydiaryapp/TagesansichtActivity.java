@@ -59,7 +59,8 @@ public class TagesansichtActivity extends AppCompatActivity {
     private void addEventToList() {
         @SuppressLint("WrongViewCast") ListView event = (ListView) findViewById(R.id.terminHinzu);
         eventListe = new ArrayAdapter<String>(this, android.R.layout. simple_list_item_1 );
-        final ArrayList<ArrayList<String>> AlleTermine = TerminData.AlleTermine(getApplicationContext());
+        TerminData data= new TerminData(getApplicationContext());
+        final ArrayList<ArrayList<String>> AlleTermine =data.data();
         for (ArrayList<String> b : AlleTermine) {
             eventListe.add(b.get(2)+"-"+b.get(3));
         }
@@ -78,7 +79,6 @@ public class TagesansichtActivity extends AppCompatActivity {
         };
         event.setOnItemClickListener(mListClickedHandler);
     }
-
     private void onClickAdd(){
         Button terminHinzu = (Button) findViewById(R.id.terminHinzu);
         View.OnClickListener speichernListener = new View.OnClickListener() {
