@@ -28,15 +28,18 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_todo:
-                    if(iAmHere=="todo"){
+                    if(!iAmHere.contains("todo")){
                         //Todo Activity TODO starten
+                       Intent intent = new Intent(getApplicationContext(), ToDoListeAnzeigen.class);
+                       startActivity(intent);
+
                     }
 
                     return true;
 
                 case R.id.navigation_kalender:
-                    if(iAmHere=="kalender"){
-                        mTextMessage.setText(R.string.title_kalender);
+                    if(iAmHere.contains("kalender")){
+                        Toast.makeText(MainActivity.this, "Sie befinden sich bereits hier.", Toast.LENGTH_SHORT).show();
                     }
                     return true;
             }
@@ -54,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         //
         calendar = (CalendarView) findViewById(R.id.calendar);
         mTextMessage = (TextView) findViewById(R.id.message);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation1);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         onClickAdd();
         OnClickCalendar();

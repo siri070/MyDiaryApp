@@ -59,15 +59,18 @@ public class Terminspeichern {
                 file.createNewFile();
                 FileWriter fileWriter = new FileWriter(file);
 
+
                 BufferedWriter bufferedWriter= new BufferedWriter(fileWriter);
                 //Daten in das File schreiben
 
                 bufferedWriter.write(infos);
-
+                bufferedWriter.newLine();
                 bufferedWriter.close();
+                return true;
             }
             catch (Exception e){
                 Log.v(TAG, e.toString());
+                return false;
             }
         }
         //adf

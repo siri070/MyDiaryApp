@@ -74,7 +74,7 @@ public class terminHinzufuegen extends AppCompatActivity{
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, MY_PERMISSON_REQUEST_READ_EXTERNAL_STORAGE);
             }
         }
-      Notification notifiy= new Notification(getApplicationContext());
+    //  Notification notifiy= new Notification(getApplicationContext());
     }
     private void OnClick_Abbrechen(){
         Button speichern = (Button) findViewById(R.id.abbrechen);
@@ -92,8 +92,13 @@ public class terminHinzufuegen extends AppCompatActivity{
         View.OnClickListener speichernListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Terminspeichern terminspeichern = new Terminspeichern(GetData(),getApplicationContext(),datum);
+                if(terminspeichern.save()){
+                    error("Der Termin wurde gespeichert");
+                }
+                else{error("Der Termin konnte nicht gespeichert werden. Überprüfen Sie bitte, ob eine Speicherkarte eingesetzt ist.");}
                 Intent intent = new Intent(getApplicationContext(),MainActivity.class);
-                startActivity(intent);
+               navigateUpTo(intent);
             }
         };
         speichern.setOnClickListener(speichernListener);

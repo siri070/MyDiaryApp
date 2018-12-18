@@ -22,6 +22,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity
+            android:name=".ToDoListeAnzeigen"
+            android:label="To-Do">
+
+        </activity>
         <activity android:name=".TagesansichtActivity"
             android:label="Tagesansicht">
             <meta-data
