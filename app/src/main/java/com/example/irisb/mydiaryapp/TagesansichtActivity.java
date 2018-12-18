@@ -34,7 +34,7 @@ public class TagesansichtActivity extends AppCompatActivity {
         addTerminToList();
     }
     private void addTerminToList(){
-        ListView termine = (ListView) findViewById(R.id.termine);
+        ListView termine = findViewById(R.id.termine);
         terminListe = new ArrayAdapter<String>(this, android.R.layout. simple_list_item_1 );
         TerminData data= new TerminData(getApplicationContext());
         final ArrayList<ArrayList<String>> alleTermine = data.data();
@@ -44,7 +44,7 @@ public class TagesansichtActivity extends AppCompatActivity {
                     String terminTitel =b.get(0) ;
                     String terminBemerkung = b.get(1);
                     String datum = b.get(2);
-                    String dateSelected= date.toString();
+                    String dateSelected= date;
                    if (dateSelected.contains(datum)) {
                     terminListe.add(terminTitel+"  "+terminBemerkung);
                     terminListe2.add(b.get(3));
@@ -57,7 +57,7 @@ public class TagesansichtActivity extends AppCompatActivity {
 
     }
     private void addEventToList() {
-        @SuppressLint("WrongViewCast") ListView event = (ListView) findViewById(R.id.terminHinzu);
+        @SuppressLint("WrongViewCast") ListView event = findViewById(R.id.terminHinzu);
         eventListe = new ArrayAdapter<String>(this, android.R.layout. simple_list_item_1 );
         TerminData data= new TerminData(getApplicationContext());
         final ArrayList<ArrayList<String>> AlleTermine =data.data();
@@ -80,7 +80,7 @@ public class TagesansichtActivity extends AppCompatActivity {
         event.setOnItemClickListener(mListClickedHandler);
     }
     private void onClickAdd(){
-        Button terminHinzu = (Button) findViewById(R.id.terminHinzu);
+        Button terminHinzu = findViewById(R.id.terminHinzu);
         View.OnClickListener speichernListener = new View.OnClickListener() {
             @Override
             public void onClick(View view) {
