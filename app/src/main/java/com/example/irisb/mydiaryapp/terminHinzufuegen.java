@@ -51,7 +51,6 @@ public class terminHinzufuegen extends AppCompatActivity{
             }
         };
         speichern.setOnClickListener(speichernListener);
-        // Machen, dases wieder zum Parent geht (Kalender oder Tages ansicht)
 
     }
     private void SwitchListener(){
@@ -76,17 +75,16 @@ public class terminHinzufuegen extends AppCompatActivity{
         int permissonCheckWrite = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         if( ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
             if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)){
-
             }
             else{
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, MY_PERMISSON_REQUEST_WRITE_EXTERNAL_STORAGE);
             }
         }
+
         //Read
         int permissonCheckRead = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
         if( ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
             if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.READ_EXTERNAL_STORAGE)){
-
             }
             else{
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, MY_PERMISSON_REQUEST_READ_EXTERNAL_STORAGE);
@@ -103,7 +101,7 @@ public class terminHinzufuegen extends AppCompatActivity{
                    Log.v(TAG, e.toString());
                }
            }
-           File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+"Termine"+File.separator+"TermineDaten.csv");
+           File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+"Termine"+File.separator+datum+".csv");
            //Überprüfung ob das File schon existiert, falls nicht wird es erstellt
            if(!file.exists()){
                try{
@@ -113,7 +111,7 @@ public class terminHinzufuegen extends AppCompatActivity{
                    Log.v(TAG, e.toString());
                }
            }
-            //adf
+
            if(file.exists()){
                try{
                    FileWriter fileWriter = new FileWriter(file);
@@ -150,20 +148,15 @@ public class terminHinzufuegen extends AppCompatActivity{
         String terminBemerkung = etBemerkung.getText().toString();
 
         //Switch erinnerung
-
         if(erinnerung ){
 
             //Alarm implementieren
-
-
         }
         String alleInfos= terminTitel+";"+terminBemerkung+";"+Datum;
         return alleInfos;
-
     }
 
     private void error(String fehlermeldung){
-
         AlertDialog.Builder helpBuilder = new AlertDialog.Builder(this);
         helpBuilder.setTitle("Meldung");
         helpBuilder.setMessage(fehlermeldung);
@@ -178,7 +171,5 @@ public class terminHinzufuegen extends AppCompatActivity{
         // Remember, create doesn't show the dialog
         AlertDialog helpDialog = helpBuilder.create();
         helpDialog.show();
-
-
     }
 }

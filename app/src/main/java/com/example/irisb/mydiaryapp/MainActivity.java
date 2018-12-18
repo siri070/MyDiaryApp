@@ -12,7 +12,11 @@ import android.widget.CalendarView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
+    //https://applandeo.com/blog/material-calendar-view-customized-calendar-widget-android/
 
     private TextView mTextMessage;
 
@@ -22,14 +26,14 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
+                case R.id.navigation_todo:
+                    mTextMessage.setText(R.string.title_todo);
                     return true;
-                case R.id.navigation_dashboard:
+               /* case R.id.navigation_dashboard:
                     mTextMessage.setText(R.string.title_dashboard);
-                    return true;
-                case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
+                    return true;*/
+                case R.id.navigation_kalender:
+                    mTextMessage.setText(R.string.title_kalender);
                     return true;
             }
             return false;
@@ -37,12 +41,14 @@ public class MainActivity extends AppCompatActivity {
     };
 
     CalendarView calendar;
+    private List<TerminData> terminData = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        //
+        calendar = (CalendarView) findViewById(R.id.calendar);
         mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
@@ -51,13 +57,18 @@ public class MainActivity extends AppCompatActivity {
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
-                Toast.makeText(getApplicationContext(), dayOfMonth + "/" +month +"/" + year, Toast.LENGTH_LONG).show();
-
+               Toast.makeText(getApplicationContext(), dayOfMonth + "/" +month +"/" + year, Toast.LENGTH_LONG).show();
+                       /* Intent intent = new Intent(MainActivity.this, TagesansichtActivity.class);
+                       //https://github.com/Applandeo/Material-Calendar-View
+                        startActivity(intent);
+                        Intent intent = new Intent(getApplicationContext(), TagesansichtActivity.class);
+                        startActivity(intent);
+                        */
             }
         });
-
         onClickAdd();
     }
+
     private void onClickAdd(){
         Button neuerTermin = (Button) findViewById(R.id.terminHinzu);
         View.OnClickListener speichernListener = new View.OnClickListener() {
@@ -65,12 +76,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), terminHinzufuegen.class);
                 startActivity(intent);
-
+                /*Intent intent = new Intent(getApplicationContext(), TagesansichtActivity.class);
+                startActivity(intent);*/
             }
         };
        neuerTermin.setOnClickListener(speichernListener);
-
     }
-
-
 }
