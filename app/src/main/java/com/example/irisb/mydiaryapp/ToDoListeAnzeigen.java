@@ -74,8 +74,6 @@ ArrayAdapter TerminList;
                 String terminTitel =b.get(0) ;
                 String terminBemerkung = b.get(1);
                 String datum = b.get(2);
-                DateFormat dateFormat= new SimpleDateFormat(" dd/MM/yyyy");
-
                 Date date= new Date();
                 String[] datum1=  datum.split("/");
                 Date date1 = new Date(Integer.parseInt(datum1[2]),Integer.parseInt(datum1[1])-1,Integer.parseInt(datum1[0]));

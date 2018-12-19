@@ -130,6 +130,9 @@ public class terminHinzufuegen extends AppCompatActivity{
         EditText etTitel = (EditText) findViewById(R.id.terminTitel);
         String terminTitel = etTitel.getText().toString();
 
+        if(terminTitel.length()==0){
+            terminTitel = "Kein Titel";
+        }
         //DatePicker terminDatum
         DatePicker dpDatum= (DatePicker)findViewById(R.id.terminDatum);
         int day = dpDatum.getDayOfMonth();
@@ -140,14 +143,16 @@ public class terminHinzufuegen extends AppCompatActivity{
         //EditText terminBemerkung
         EditText etBemerkung= (EditText) findViewById(R.id.terminBemerkung);
         String terminBemerkung = etBemerkung.getText().toString();
+
+        if(terminBemerkung.length()==0){
+            terminBemerkung= "keine Noitzen";
+        }
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         String date = sdf.format(new Date());
 
         StringTokenizer tokens = new StringTokenizer(date, "/");
 
-        int thisDay= Integer.parseInt(tokens.nextToken()) ;
-        int thisMonth = Integer.parseInt(tokens.nextToken()) ;
-        int thisYear = Integer.parseInt(tokens.nextToken()) ;
+
         //Switch erinnerung
 
         if(erinnerung ) {
